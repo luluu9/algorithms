@@ -1,4 +1,5 @@
 from random import randint
+import timeit
 
 
 def generate_lst(length):
@@ -12,7 +13,7 @@ def bubble_sorting(lst):
     moved = True
     while moved is True:
         moved = False
-        for i in range(len(lst)-1):
+        for i in range(len(lst) - 1):
             if lst[i] > lst[i + 1]:
                 temp = lst[i]
                 lst[i] = lst[i + 1]
@@ -67,7 +68,12 @@ def merge_sorting(lst):
         return lst
 
 
-lst = generate_lst(30)
-print(selection_sorting(lst))
-print(bubble_sorting(lst))
-print(merge_sorting(lst))
+def check_sorting(callback, lst):
+    exec_time = timeit.Timer(lambda: callback(lst)).timeit(1)
+    print(callback.__name__ + ": " + str(exec_time))
+
+
+lst = generate_lst(1000)
+check_sorting(selection_sorting, lst)
+check_sorting(bubble_sorting, lst)
+check_sorting(merge_sorting, lst)
