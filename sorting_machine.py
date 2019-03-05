@@ -72,8 +72,17 @@ def merge_sorting(lst):
         return lst
 
 
+def is_sorted(lst):
+    sorted = True
+    for i in range(0, len(lst) - 1):
+        if not lst[i] <= lst[i + 1]:
+            sorted = False
+    return sorted
+
+
 def check_sorting(callback, lst):
-    exec_time = timeit.Timer(lambda: callback(lst)).timeit(1)
+    exec_time = timeit.Timer(lambda: print("OK") if is_sorted(callback(lst))
+                             else print("Not OK")).timeit(1)
     print(callback.__name__ + ": " + str(exec_time))
 
 
