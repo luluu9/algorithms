@@ -9,11 +9,13 @@ def generate_lst(length):
     return lst
 
 
+# O(n^2) - in reality n^2-n but -n is not that important
+# as n^2 when it comes to big list of element
 def bubble_sorting(lst):
     moved = True
-    while moved is True:
+    while moved is True:  # in worst case n (n=len(lst))
         moved = False
-        for i in range(len(lst) - 1):
+        for i in range(len(lst) - 1):  # n-1
             if lst[i] > lst[i + 1]:
                 temp = lst[i]
                 lst[i] = lst[i + 1]
@@ -22,12 +24,13 @@ def bubble_sorting(lst):
     return lst
 
 
+# O(n/2*n) but known as O(n^2)
 def selection_sorting(lst):
     d = len(lst)
-    for i in range(d):
+    for i in range(d):  # n
         smallest = lst[i]
         smallestIndex = i
-        for j in range(i + 1, d):
+        for j in range(i + 1, d):  # n-1, n-2, n-3... so n/2
             if (lst[j] < smallest):
                 smallest = lst[j]
                 smallestIndex = j
@@ -37,6 +40,7 @@ def selection_sorting(lst):
     return lst
 
 
+# O(n/2*n) but known as O(n^2)
 def merge_sorting(lst):
     def merge(left_lst, right_lst):
         lst = []
@@ -62,9 +66,9 @@ def merge_sorting(lst):
     else:
         left_lst = lst[:len(lst) // 2]
         right_lst = lst[len(lst) // 2:]
-        left_lst_sorted = merge_sorting(left_lst)
-        right_lst_sorted = merge_sorting(right_lst)
-        lst = merge(left_lst_sorted, right_lst_sorted)
+        left_lst_sorted = merge_sorting(left_lst)  # n/4
+        right_lst_sorted = merge_sorting(right_lst)  # n/4, summing up to n/2
+        lst = merge(left_lst_sorted, right_lst_sorted)  # n
         return lst
 
 

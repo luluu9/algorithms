@@ -1,3 +1,4 @@
+# O(log n)
 def binary_search(searched, sorted_list):
     median_index = len(sorted_list) // 2
     median = sorted_list[median_index]
